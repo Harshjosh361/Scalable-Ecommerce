@@ -1,0 +1,15 @@
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27018:27018"
+      
+  goapp:
+    build: .
+    container_name: goapp
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo
