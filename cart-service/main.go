@@ -34,5 +34,5 @@ func main() {
 	router.GET("/cart/:userId", CartController.GetCart)
 	router.DELETE("/cart/:userId/clear", CartController.ClearCart)
 
-	router.Run(":8080")
+	router.Run(":8085")
 }

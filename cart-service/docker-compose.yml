@@ -4,12 +4,12 @@ services:
     image: mongo:latest
     restart: always
     ports:
-      - "27017:27017"
+      - "27020:27020"
       
   goapp:
     build: .
     container_name: goapp
     ports:
-      - "8080:8080"
+      - "8085:8085"
     depends_on:
       - mongo
