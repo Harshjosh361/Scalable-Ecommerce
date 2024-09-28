@@ -25,7 +25,7 @@ func main() {
 	// routes
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"message": "Server is live",
+			"message": "user Server is live",
 		})
 	})
 	router.GET("/users/:id", userController.GetUser)
