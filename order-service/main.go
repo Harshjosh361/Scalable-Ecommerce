@@ -30,5 +30,5 @@ func main() {
 	router.GET("/order/user/:userid", OrderController.GetOrderByUserId)
 
 	// port
-	router.Run(":8080")
+	router.Run(":8082")
 }
