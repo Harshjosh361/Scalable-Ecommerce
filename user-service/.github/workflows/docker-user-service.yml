@@ -1,74 +1,49 @@
-name: Docker CI/CD for user-service
+name: User Service CI/CD
 
 on:
-  schedule:
-    - cron: '27 15 * * *' # Schedule builds
   push:
-    branches: [ "master" ]
-    paths:
-      - 'user-service/**'  # Trigger when files in user-service change
-    tags: [ 'v*.*.*' ] # Trigger on semantic version tags
+    branches:
+      - main
   pull_request:
-    branches: [ "master" ]
-    paths:
-      - 'user-service/**' # Trigger for pull requests affecting user-service
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-user-service
+    branches:
+      - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # Install cosign manually in case of installation issues
-      - name: Install cosign
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.22'  # Use the Go version you need
+
+      - name: Install dependencies
         run: |
-          curl -sLO https://github.com/sigstore/cosign/releases/download/v2.2.4/cosign-linux-amd64
-          chmod +x cosign-linux-amd64
-          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+          cd user-service
+          go mod tidy
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3.0.0
+      - name: Run tests
+        run: |
+          cd user-service
+          go test ./...
 
-      - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3.0.0
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        run: |
+          cd user-service
+          go build -o user-service .
 
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5.0.0
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build and push Docker image
-        id: build-and-push
-        uses: docker/build-push-action@v5.0.0
-        with:
-          context: ./user-service  # Only build the user-service folder
-          file: ./user-service/Dockerfile  # Specify Dockerfile location
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      - name: Build Docker image
+        run: |
+          cd user-service
+          docker build -t harshjosh361/user-service:latest .
 
-      # Sign the resulting Docker image except on PRs
-      - name: Sign the published Docker image
-        if: ${{ github.event_name != 'pull_request' }}
-        env:
-          TAGS: ${{ steps.meta.outputs.tags }}
-          DIGEST: ${{ steps.build-and-push.outputs.digest }}
-        run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+      - name: Push Docker image
+        run: |
+          docker push harshjosh361/user-service:latest 
