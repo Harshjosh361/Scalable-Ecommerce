@@ -24,11 +24,15 @@ jobs:
       # Build and Push Services
       - name: Build and Push Services
         run: |
+          set -e  # Exit immediately if a command fails
           services=("cart-service" "notification-service" "order-service" "payment-service" "product-service" "user-service")
+
+          # Log in to ECR once
+          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
+
           for service in "${services[@]}"; do
             cd $service
             docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/${service}:latest .
-            aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
             docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/${service}:latest
             cd ..
           done
