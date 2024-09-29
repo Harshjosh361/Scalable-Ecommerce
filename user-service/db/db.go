@@ -10,7 +10,7 @@ import (
 )
 
 func Init() *mongo.Database {
-	clientOptions := options.Client().ApplyURI("mongodb://mongo:27018/")
+	clientOptions := options.Client().ApplyURI("mongodb://mongo:27017/")
 	client, err := mongo.Connect(context.Background(), clientOptions)
 	if err != nil {
 		log.Fatal("Failed to connect to mongodb:", err)
