@@ -1,0 +1,212 @@
+name: CI/CD for Microservices
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'cart-service/**'                # Tracks changes in cart-service folder
+      - 'notification-service/**'         # Tracks changes in notification-service folder
+      - 'order-service/**'                # Tracks changes in order-service folder
+      - 'payment-service/**'              # Tracks changes in payment-service folder
+      - 'product-service/**'              # Tracks changes in product-service folder
+      - 'user-service/**'                 # Tracks changes in user-service folder
+
+jobs:
+  # Job for Cart Service
+  build-test-deploy-cart-service:
+    if: contains(github.event.head_commit.message, 'cart-service') || github.event_name == 'push'
+    name: Build, Test, and Deploy Cart Service
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Log in to Amazon ECR
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Build Docker image for Cart Service
+      - name: Build Cart Service Docker Image
+        run: |
+          SERVICE_NAME=cart-service
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t $SERVICE_NAME ./cart-service  # Adjust path if your Dockerfile is in a different folder
+          docker tag $SERVICE_NAME:latest 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/cart-service/$SERVICE_NAME:$IMAGE_TAG  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+      # Test the Cart Service (replace with actual test command)
+      - name: Run Tests for Cart Service
+        run: |
+          cd cart-service
+          # Add your test commands here
+          echo "Running tests for Cart Service"
+
+      # Push Docker image to Amazon ECR
+      - name: Push Cart Service Image to ECR
+        run: |
+          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/cart-service/cart-service:${{ github.sha }}  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+  # Job for Notification Service
+  build-test-deploy-notification-service:
+    if: contains(github.event.head_commit.message, 'notification-service') || github.event_name == 'push'
+    name: Build, Test, and Deploy Notification Service
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Notification Service Docker Image
+        run: |
+          SERVICE_NAME=notification-service
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t $SERVICE_NAME ./notification-service  # Adjust path if your Dockerfile is in a different folder
+          docker tag $SERVICE_NAME:latest 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/notification-service/$SERVICE_NAME:$IMAGE_TAG  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+      - name: Run Tests for Notification Service
+        run: |
+          cd notification-service
+          # Add your test commands here
+          echo "Running tests for Notification Service"
+
+      - name: Push Notification Service Image to ECR
+        run: |
+          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/notification-service/notification-service:${{ github.sha }}  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+  # Job for Order Service
+  build-test-deploy-order-service:
+    if: contains(github.event.head_commit.message, 'order-service') || github.event_name == 'push'
+    name: Build, Test, and Deploy Order Service
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Order Service Docker Image
+        run: |
+          SERVICE_NAME=order-service
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t $SERVICE_NAME ./order-service  # Adjust path if your Dockerfile is in a different folder
+          docker tag $SERVICE_NAME:latest 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/order-service/$SERVICE_NAME:$IMAGE_TAG  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+      - name: Run Tests for Order Service
+        run: |
+          cd order-service
+          # Add your test commands here
+          echo "Running tests for Order Service"
+
+      - name: Push Order Service Image to ECR
+        run: |
+          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/order-service/order-service:${{ github.sha }}  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+  # Job for Payment Service
+  build-test-deploy-payment-service:
+    if: contains(github.event.head_commit.message, 'payment-service') || github.event_name == 'push'
+    name: Build, Test, and Deploy Payment Service
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Payment Service Docker Image
+        run: |
+          SERVICE_NAME=payment-service
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t $SERVICE_NAME ./payment-service  # Adjust path if your Dockerfile is in a different folder
+          docker tag $SERVICE_NAME:latest 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/payment-service/$SERVICE_NAME:$IMAGE_TAG  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+      - name: Run Tests for Payment Service
+        run: |
+          cd payment-service
+          # Add your test commands here
+          echo "Running tests for Payment Service"
+
+      - name: Push Payment Service Image to ECR
+        run: |
+          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/payment-service/payment-service:${{ github.sha }}  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+  # Job for Product Service
+  build-test-deploy-product-service:
+    if: contains(github.event.head_commit.message, 'product-service') || github.event_name == 'push'
+    name: Build, Test, and Deploy Product Service
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Product Service Docker Image
+        run: |
+          SERVICE_NAME=product-service
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t $SERVICE_NAME ./product-service  # Adjust path if your Dockerfile is in a different folder
+          docker tag $SERVICE_NAME:latest 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/product-service/$SERVICE_NAME:$IMAGE_TAG  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+      - name: Run Tests for Product Service
+        run: |
+          cd product-service
+          # Add your test commands here
+          echo "Running tests for Product Service"
+
+      - name: Push Product Service Image to ECR
+        run: |
+          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/product-service/product-service:${{ github.sha }}  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+  # Job for User Service
+  build-test-deploy-user-service:
+    if: contains(github.event.head_commit.message, 'user-service') || github.event_name == 'push'
+    name: Build, Test, and Deploy User Service
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build User Service Docker Image
+        run: |
+          SERVICE_NAME=user-service
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t $SERVICE_NAME ./user-service  # Adjust path if your Dockerfile is in a different folder
+          docker tag $SERVICE_NAME:latest 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/user-service/$SERVICE_NAME:$IMAGE_TAG  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
+
+      - name: Run Tests for User Service
+        run: |
+          cd user-service
+          # Add your test commands here
+          echo "Running tests for User Service"
+
+      - name: Push User Service Image to ECR
+        run: |
+          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/user-service/user-service:${{ github.sha }}  # Replace $ECR_REPOSITORY_URL with your AWS ECR repository URL
