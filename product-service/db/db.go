@@ -10,7 +10,7 @@ import (
 )
 
 func Init() *mongo.Database {
-	clientOption := options.Client().ApplyURI("mongodb://mongo:27018/")
+	clientOption := options.Client().ApplyURI("mongodb://mongo:27017/")
 
 	client, err := mongo.Connect(context.Background(), clientOption)
 	if err != nil {
@@ -21,6 +21,7 @@ func Init() *mongo.Database {
 	if err != nil {
 		log.Fatal("failed to ping db")
 	}
+
 	fmt.Println("Successfully connected to database")
 	return client.Database("Testing")
 }
