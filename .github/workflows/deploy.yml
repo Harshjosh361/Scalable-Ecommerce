@@ -30,6 +30,8 @@ jobs:
       # Log in to Amazon ECR
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          region: 'ap-northeast-1'
 
       # Build Docker image for Cart Service
       - name: Build Cart Service Docker Image
@@ -65,6 +67,8 @@ jobs:
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          region: 'ap-northeast-1'
 
       - name: Build Notification Service Docker Image
         run: |
@@ -97,6 +101,9 @@ jobs:
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          region: 'ap-northeast-1'
+
 
       - name: Build Order Service Docker Image
         run: |
@@ -129,6 +136,8 @@ jobs:
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          region: 'ap-northeast-1'
 
       - name: Build Payment Service Docker Image
         run: |
@@ -161,7 +170,8 @@ jobs:
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
-
+        with:
+          region: 'ap-northeast-1'
       - name: Build Product Service Docker Image
         run: |
           SERVICE_NAME=product-service
@@ -193,6 +203,8 @@ jobs:
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          region: 'ap-northeast-1'
 
       - name: Build User Service Docker Image
         run: |
