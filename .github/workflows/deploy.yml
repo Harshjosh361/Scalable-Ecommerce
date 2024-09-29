@@ -3,7 +3,7 @@ name: CI/CD for Microservices
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - 'cart-service/**'                # Tracks changes in cart-service folder
       - 'notification-service/**'         # Tracks changes in notification-service folder
