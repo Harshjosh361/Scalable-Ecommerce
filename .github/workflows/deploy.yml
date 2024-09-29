@@ -3,7 +3,7 @@ name: Build and Push to AWS ECR
 on:
   push:
     branches:
-      - master  # Change to your preferred branch
+      - master  
 
 jobs:
   build-and-push:
@@ -17,54 +17,18 @@ jobs:
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Ensure this secret is set in your GitHub repository settings
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Set this in your GitHub secrets
-          aws-region: ap-northeast-1  # Specify your AWS region here
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
 
-      # Build and Push Cart Service
-      - name: Build and Push Cart Service
+      # Build and Push Services
+      - name: Build and Push Services
         run: |
-          cd cart-service  # Navigate to the cart service directory
-          docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/cart-service:latest .
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
-          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/cart-service:latest
-
-      # Build and Push Notification Service
-      - name: Build and Push Notification Service
-        run: |
-          cd notification-service  # Navigate to the notification service directory
-          docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/notification-service:latest .
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
-          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/notification-service:latest
-
-      # Build and Push Order Service
-      - name: Build and Push Order Service
-        run: |
-          cd order-service  # Navigate to the order service directory
-          docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/order-service:latest .
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
-          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/order-service:latest
-
-      # Build and Push Payment Service
-      - name: Build and Push Payment Service
-        run: |
-          cd payment-service  # Navigate to the payment service directory
-          docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/payment-service:latest .
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
-          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/payment-service:latest
-
-      # Build and Push Product Service
-      - name: Build and Push Product Service
-        run: |
-          cd product-service  # Navigate to the product service directory
-          docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/product-service:latest .
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
-          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/product-service:latest
-
-      # Build and Push User Service
-      - name: Build and Push User Service
-        run: |
-          cd user-service  # Navigate to the user service directory
-          docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/user-service:latest .
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
-          docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/user-service:latest
+          services=("cart-service" "notification-service" "order-service" "payment-service" "product-service" "user-service")
+          for service in "${services[@]}"; do
+            cd $service
+            docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/${service}:latest .
+            aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
+            docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/${service}:latest
+            cd ..
+          done
