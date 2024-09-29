@@ -29,9 +29,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Install cosign manually in case of installation issues
       - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@v2.2.4
+        run: |
+          curl -sLO https://github.com/sigstore/cosign/releases/download/v2.2.4/cosign-linux-amd64
+          chmod +x cosign-linux-amd64
+          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.0.0
@@ -55,12 +58,14 @@ jobs:
         uses: docker/build-push-action@v5.0.0
         with:
           context: ./user-service  # Only build the user-service folder
+          file: ./user-service/Dockerfile  # Specify Dockerfile location
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      # Sign the resulting Docker image except on PRs
       - name: Sign the published Docker image
         if: ${{ github.event_name != 'pull_request' }}
         env:
