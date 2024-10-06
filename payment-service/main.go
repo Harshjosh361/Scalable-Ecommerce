@@ -20,11 +20,11 @@ func main() {
 	PaymentController := controller.NewPaymentController(PaymentService)
 
 	router.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"Message": "server is live"})
+		c.JSON(http.StatusOK, gin.H{"Message": "Payment server is live"})
 	})
 
 	router.POST("/payment", PaymentController.ProcessPayment)
 	router.GET("/payment/:id", PaymentController.GetPayment)
 
-	router.Run(":8086")
+	router.Run(":8082")
 }

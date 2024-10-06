@@ -4,15 +4,15 @@ services:
     image: mongo:latest
     restart: always
     ports:
-      - "27017:27017"
+      - "27021:27017"
       
   goapp:
     build: .
-    container_name: goapp
+    container_name: goapps
     ports:
       - "8085:8085"
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/
     depends_on:
       - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/
 

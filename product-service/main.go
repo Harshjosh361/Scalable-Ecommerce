@@ -33,6 +33,6 @@ func main() {
 	router.POST("/update-product/:id", productController.ModifyProduct)
 
 	// starting server
-	router.Run(":8080")
+	router.Run(":8081")
 
 }

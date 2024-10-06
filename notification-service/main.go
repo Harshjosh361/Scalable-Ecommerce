@@ -16,7 +16,7 @@ func main() {
 	notificationController := controller.NewNotificationController(notificationService)
 
 	router.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "Server is live"})
+		c.JSON(http.StatusOK, gin.H{"message": "notification Server is live"})
 	})
 
 	router.POST("/message", notificationController.SendSMS)

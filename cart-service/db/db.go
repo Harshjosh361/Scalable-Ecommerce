@@ -12,6 +12,9 @@ import (
 
 func Init() *mongo.Database {
 	mongoURI := os.Getenv("MONGO_URI")
+	if mongoURI == "" {
+		log.Fatal("failed to load env")
+	}
 	clientOption := options.Client().ApplyURI(mongoURI)
 	client, err := mongo.Connect(context.Background(), clientOption)
 	if err != nil {
