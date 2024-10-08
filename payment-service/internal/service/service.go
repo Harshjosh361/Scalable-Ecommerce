@@ -53,7 +53,9 @@ func (ps *PaymentService) ProcessPayment(ctx context.Context, payment *model.Pay
 	if err != nil {
 		payment.Status = "Failed"
 		payment.UpdatedAt = time.Now() // Update updated_at when the status changes
-		ps.paymentData.SavePayment(ctx, payment)
+		if saveErr := ps.paymentData.SavePayment(ctx, payment); saveErr != nil {
+			log.Fatal("failed to save payment data")
+		}
 		return "", err
 	}
 
