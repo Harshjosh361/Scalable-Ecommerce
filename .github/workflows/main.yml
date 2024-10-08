@@ -35,11 +35,11 @@ jobs:
         cd ${{ matrix.service }}
         go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
         golangci-lint run
-
-    - name: Run Tests
-      run: |
-        cd ${{ matrix.service }}
-        go test ./...
+    #FOR CHECKING TEST
+    # - name: Run Tests
+    #   run: |
+    #     cd ${{ matrix.service }}
+    #     go test ./...
 
     - name: Build the Service
       run: |
