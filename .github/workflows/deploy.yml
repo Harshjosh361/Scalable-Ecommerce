@@ -3,8 +3,10 @@ name: Build and Push to AWS ECR
 on:
   push:
     branches:
-      - master  
-
+      - main 
+      #disabled deployment in master for testing  
+    
+  
 jobs:
   build-and-push:
     runs-on: ubuntu-latest

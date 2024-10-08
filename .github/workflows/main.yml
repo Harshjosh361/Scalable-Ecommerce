@@ -1,0 +1,47 @@
+name: Go CI Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch: #for manually triggering
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service: [user-service, product-service, payment-service, order-service, notification-service,cart-service]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.22'
+
+    - name: Install dependencies
+      run: |
+        cd ${{ matrix.service }}
+        go mod tidy
+
+    - name: Run Linter
+      run: |
+        cd ${{ matrix.service }}
+        go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+        golangci-lint run
+
+    - name: Run Tests
+      run: |
+        cd ${{ matrix.service }}
+        go test ./...
+
+    - name: Build the Service
+      run: |
+        cd ${{ matrix.service }}
+        go build -o ${{ matrix.service }}-binary
