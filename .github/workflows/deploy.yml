@@ -1,40 +1,43 @@
-name: Build and Push to AWS ECR
+name: CD Pipeline for Multiple Services
 
 on:
   push:
     branches:
-      - main 
-      #disabled deployment in master for testing  
-    
-  
+      - main  
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - user-service
+          - product-service
+          - payment-service
+          - order-service
+          - notification-service
+          - cart-service
+
     steps:
-      # Checkout Code
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # Set up AWS CLI
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Build and Push Services
-      - name: Build and Push Services
-        run: |
-          set -e  # Exit immediately if a command fails
-          services=("cart-service" "notification-service" "order-service" "payment-service" "product-service" "user-service")
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./${{ matrix.service }}  # Change the context for each service
+          file: ./${{ matrix.service }}/Dockerfile  # Path to the Dockerfile for each service
+          push: true
+          tags: harshjosh361/${{ matrix.service }}:latest  
 
-          # Log in to ECR once
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com
-
-          for service in "${services[@]}"; do
-            cd $service
-            docker build -t 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/${service}:latest .
-            docker push 354093282943.dkr.ecr.ap-northeast-1.amazonaws.com/${service}:latest
-            cd ..
-          done
+      - name: Notify Deployment Success
+        run: echo "Docker image for ${{ matrix.service }} has been successfully deployed!"
