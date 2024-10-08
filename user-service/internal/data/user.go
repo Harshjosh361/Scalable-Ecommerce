@@ -22,10 +22,12 @@ func NewUserStore(db *mongo.Database) *UserStore {
 }
 
 func (s *UserStore) CreateUser(ctx context.Context, user *models.User) (*models.User, error) {
-	_, err := s.Collection.InsertOne(ctx, user)
+	result, err := s.Collection.InsertOne(ctx, user)
 	if err != nil {
 		return nil, err
 	}
+	// extract the user id and set
+	user.ID = result.InsertedID.(primitive.ObjectID)
 	return user, nil
 }
 
