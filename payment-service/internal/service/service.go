@@ -62,9 +62,9 @@ func (ps *PaymentService) ProcessPayment(ctx context.Context, payment *model.Pay
 	payment.UpdatedAt = time.Now()
 
 	// Save the payment to the database
-	err = ps.paymentData.SavePayment(ctx, payment)
-	if err != nil {
-		return "", err
+	Newerr := ps.paymentData.SavePayment(ctx, payment)
+	if Newerr != nil {
+		return "", Newerr
 	}
 
 	return result.ID, nil
