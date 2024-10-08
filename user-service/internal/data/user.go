@@ -3,7 +3,6 @@ package data
 import (
 	"context"
 	"errors"
-	"fmt"
 	"harsh/internal/models"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -23,16 +22,10 @@ func NewUserStore(db *mongo.Database) *UserStore {
 }
 
 func (s *UserStore) CreateUser(ctx context.Context, user *models.User) (*models.User, error) {
-	res, err := s.Collection.InsertOne(ctx, user)
+	_, err := s.Collection.InsertOne(ctx, user)
 	if err != nil {
 		return nil, err
 	}
-	// get the id of the inserted documents using TYPE ASSERTION
-	insertedId, ok := res.InsertedID.(primitive.ObjectID)
-	if !ok {
-		return nil, fmt.Errorf("failed to cast inserted ID to ObjectID")
-	}
-	user.Id = insertedId
 	return user, nil
 }
 

@@ -55,7 +55,7 @@ func (s *UserService) Login(ctx context.Context, email, password string) (string
 	}
 
 	// generate jwt token
-	token, err := utils.GenerateJWT(user.Id.Hex())
+	token, err := utils.GenerateJWT(user.ID.Hex())
 	if err != nil {
 		return "", errors.New("unable to generate jwt")
 	}
