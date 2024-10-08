@@ -3,6 +3,7 @@ package main
 import (
 	"harsh/internal/controller"
 	"harsh/internal/service"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -21,5 +22,7 @@ func main() {
 
 	router.POST("/message", notificationController.SendSMS)
 
-	router.Run(":8084")
+	if err := router.Run(":8084"); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 }

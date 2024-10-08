@@ -5,6 +5,7 @@ import (
 	"harsh/internal/controller"
 	"harsh/internal/data"
 	"harsh/internal/service"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -33,5 +34,7 @@ func main() {
 	router.POST("/login", userController.Login)
 
 	// starting server
-	router.Run(":8080")
+	if err := router.Run(":8080"); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 }

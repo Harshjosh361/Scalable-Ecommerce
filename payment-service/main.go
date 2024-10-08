@@ -5,6 +5,7 @@ import (
 	"harsh/internal/controller"
 	"harsh/internal/data"
 	"harsh/internal/service"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,5 +27,7 @@ func main() {
 	router.POST("/payment", PaymentController.ProcessPayment)
 	router.GET("/payment/:id", PaymentController.GetPayment)
 
-	router.Run(":8082")
+	if err := router.Run(":8082"); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 }

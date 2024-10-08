@@ -5,6 +5,7 @@ import (
 	"harsh/internal/controller"
 	"harsh/internal/data"
 	"harsh/internal/service"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -33,6 +34,8 @@ func main() {
 	router.POST("/update-product/:id", productController.ModifyProduct)
 
 	// starting server
-	router.Run(":8081")
+	if err := router.Run(":8081"); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 
 }

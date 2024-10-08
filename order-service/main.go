@@ -5,6 +5,7 @@ import (
 	"harshy/internal/controller"
 	"harshy/internal/data"
 	"harshy/internal/service"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -30,5 +31,7 @@ func main() {
 	router.GET("/order/user/:userid", OrderController.GetOrderByUserId)
 
 	// port
-	router.Run(":8083")
+	if err := router.Run(":8083"); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 }

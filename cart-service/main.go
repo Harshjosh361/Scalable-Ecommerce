@@ -5,6 +5,7 @@ import (
 	"harsh/internal/controller"
 	"harsh/internal/data"
 	"harsh/internal/service"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -34,5 +35,7 @@ func main() {
 	router.GET("/cart/:userId", CartController.GetCart)
 	router.DELETE("/cart/:userId/clear", CartController.ClearCart)
 
-	router.Run(":8085")
+	if err := router.Run(":8085"); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 }
