@@ -36,7 +36,7 @@ func (cc *CartController) CreateCart(c *gin.Context) {
 }
 
 func (cc *CartController) AddToCart(c *gin.Context) {
-	user_id := c.Param("userid")
+	user_id := c.Param("userId")
 
 	var item model.CartItem
 	if err := c.ShouldBindJSON(&item); err != nil {

@@ -30,7 +30,7 @@ func main() {
 
 	// routes
 	router.POST("/cart", CartController.CreateCart)
-	router.POST("/cart/:userId/items", CartController.AddToCart)
+	router.PUT("/cart/:userId/items", CartController.AddToCart)
 	router.DELETE("/cart/:userId/items/:productId", CartController.RemoveFromCart)
 	router.GET("/cart/:userId", CartController.GetCart)
 	router.DELETE("/cart/:userId/clear", CartController.ClearCart)

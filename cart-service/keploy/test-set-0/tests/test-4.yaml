@@ -1,0 +1,48 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-4
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8085/cart/5f4dcc3b5aa765d61d8327de
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br
+            Connection: close
+            Content-Length: "288"
+            Content-Type: application/json
+            Host: localhost:8085
+            User-Agent: Thunder Client (https://www.thunderclient.com)
+        body: "{\n  \"items\": [\n    {\n      \"productId\": \"64d8a1f7e2b7b72c2b8b4567\",\n      \"unitPrice\": 19.99,\n      \"quantity\": 2,\n      \"totalPrice\": 39.98\n    },\n    {\n      \"productId\": \"64d8a1f7e2b7b72c2b8b4568\",  \n      \"unitPrice\": 29.99,\n      \"quantity\": 1,\n      \"totalPrice\": 29.99\n    }\n  ]\n}\n"
+        timestamp: 2024-10-09T06:46:11.429537641Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "460"
+            Content-Type: application/json; charset=utf-8
+            Date: Wed, 09 Oct 2024 06:46:11 GMT
+        body: '{"id":"670626631818184d3aee0ed8","userId":"5f4dcc3b5aa765d61d8327de","items":[{"productId":"5f4dcc3b5aa765d61d8327de","unitPrice":19.99,"quantity":2,"totalPrice":39.98},{"productId":"5f4dcc3b5aa765d61d8327df","unitPrice":29.99,"quantity":1,"totalPrice":29.99},{"productId":"000000000000000000000000","unitPrice":0,"quantity":0,"totalPrice":0}],"totalPrice":69.97,"status":"pending","createdAt":"2024-10-09T06:44:51.964Z","updatedAt":"2024-10-09T06:45:59.105Z"}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-10-09T06:46:13.440455115Z
+    objects: []
+    assertions:
+        noise:
+            body.createdAt: []
+            body.updatedAt: []
+            header.Date: []
+    created: 1728456373
+curl: |-
+    curl --request GET \
+      --url http://localhost:8085/cart/5f4dcc3b5aa765d61d8327de \
+      --header 'Connection: close' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Accept: */*' \
+      --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+      --header 'Content-Type: application/json' \
+      --header 'Host: localhost:8085' \
+      --data "{\n  \"items\": [\n    {\n      \"productId\": \"64d8a1f7e2b7b72c2b8b4567\",\n      \"unitPrice\": 19.99,\n      \"quantity\": 2,\n      \"totalPrice\": 39.98\n    },\n    {\n      \"productId\": \"64d8a1f7e2b7b72c2b8b4568\",  \n      \"unitPrice\": 29.99,\n      \"quantity\": 1,\n      \"totalPrice\": 29.99\n    }\n  ]\n}\n"

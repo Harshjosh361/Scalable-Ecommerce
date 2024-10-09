@@ -39,7 +39,7 @@ func (c *CartStore) AddToCart(ctx context.Context, user_id primitive.ObjectID, i
 		"$push": bson.M{
 			"items": item,
 		},
-		"$set": bson.M{"updatedAt": currentTime},
+		"$set": bson.M{"updated_at": currentTime},
 	}
 	_, err := c.Collection.UpdateOne(ctx, filter, update)
 	return err
@@ -54,7 +54,7 @@ func (c *CartStore) RemoveFromCart(ctx context.Context, product_id, user_id prim
 	update := bson.M{
 		"$pull": bson.M{
 			"items": bson.M{"product_id": product_id}},
-		"$set": bson.M{"updatedAt": currentTime},
+		"$set": bson.M{"updated_at": currentTime},
 	}
 
 	_, err := c.Collection.UpdateOne(ctx, filter, update)

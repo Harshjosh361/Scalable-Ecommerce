@@ -1,14 +1,14 @@
 services:
   mongo:
-    container_name: mongo
+    container_name: mongo-cart
     image: mongo:latest
     restart: always
     ports:
-      - "27021:27017"
+      - "27020:27017"
       
   goapp:
     build: .
-    container_name: goapps
+    container_name: goapp-cart
     ports:
       - "8085:8085"
     depends_on:
