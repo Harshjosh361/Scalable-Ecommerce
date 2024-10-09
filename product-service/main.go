@@ -31,7 +31,7 @@ func main() {
 	router.GET("/product/:id", productController.GetProduct)
 	router.POST("/product", productController.CreateProduct)
 	router.DELETE("/product/:id", productController.DeleteProduct)
-	router.POST("/update-product/:id", productController.ModifyProduct)
+	router.PUT("/update-product/:id", productController.ModifyProduct)
 
 	// starting server
 	if err := router.Run(":8081"); err != nil {

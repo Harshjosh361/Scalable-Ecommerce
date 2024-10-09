@@ -1,0 +1,53 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-7
+spec:
+    metadata: {}
+    req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8081/products
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br
+            Connection: close
+            Content-Length: "171"
+            Content-Type: application/json
+            Host: localhost:8081
+            User-Agent: Thunder Client (https://www.thunderclient.com)
+        body: |
+            {
+              "name": "Wireless Mosuse",
+              "price": 25.929,
+              "description": "A high-precision wireless mouse with ergonomic design.",
+              "category": "Electronics",
+              "stock": 150
+            }
+        timestamp: 2024-10-09T03:52:28.679171299Z
+    resp:
+        status_code: 404
+        header:
+            Content-Length: "18"
+            Content-Type: text/plain
+            Date: Wed, 09 Oct 2024 03:52:28 GMT
+        body: 404 page not found
+        status_message: Not Found
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-10-09T03:52:30.740851003Z
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1728445950
+curl: |-
+    curl --request DELETE \
+      --url http://localhost:8081/products \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Accept: */*' \
+      --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+      --header 'Content-Type: application/json' \
+      --header 'Host: localhost:8081' \
+      --header 'Connection: close' \
+      --data "{\n  \"name\": \"Wireless Mosuse\",\n  \"price\": 25.929,\n  \"description\": \"A high-precision wireless mouse with ergonomic design.\",\n  \"category\": \"Electronics\",\n  \"stock\": 150\n}\n"

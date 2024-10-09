@@ -1,0 +1,382 @@
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-0
+spec:
+    metadata:
+        operation: '{ OpQuery flags: [SecondaryOK], fullCollectionName: admin.$cmd, numberToSkip: 0, numberToReturn: -1, query: {"isMaster": {"$numberInt":"1"},"helloOk": true,"compression": [],"client": {"driver": {"name": "mongo-go-driver","version": "1.17.0"},"os": {"type": "linux","architecture": "amd64"},"platform": "go1.22.2","env": {"container": {"runtime": "docker"}}}}, returnFieldsSelector:  }'
+        type: config
+    requests:
+        - header:
+            length: 276
+            requestId: 5
+            responseTo: 0
+            Opcode: 2004
+          message:
+            flags: 4
+            collection_name: admin.$cmd
+            number_to_skip: 0
+            number_to_return: -1
+            query: '{"isMaster":{"$numberInt":"1"},"helloOk":true,"compression":[],"client":{"driver":{"name":"mongo-go-driver","version":"1.17.0"},"os":{"type":"linux","architecture":"amd64"},"platform":"go1.22.2","env":{"container":{"runtime":"docker"}}}}'
+            return_fields_selector: ""
+    responses:
+        - header:
+            length: 329
+            requestId: 3
+            responseTo: 5
+            Opcode: 1
+          message:
+            response_flags: 8
+            cursor_id: 0
+            starting_from: 0
+            number_returned: 1
+            documents:
+                - '{"helloOk":true,"ismaster":true,"topologyVersion":{"processId":{"$oid":"6705fd6e9d54d7511f21aad5"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1728445807349"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"1"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"25"},"readOnly":false,"ok":{"$numberDouble":"1.0"}}'
+          read_delay: 646707
+    created: 1728445807
+    reqTimestampMock: 2024-10-09T03:50:07.348726015Z
+    resTimestampMock: 2024-10-09T03:50:07.349709586Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-1
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"ping":{"$numberInt":"1"},"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"admin"} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 87
+            requestId: 1
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"ping":{"$numberInt":"1"},"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"admin"} }'
+            checksum: 0
+          read_delay: 75871
+    responses:
+        - header:
+            length: 38
+            requestId: 6
+            responseTo: 1
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 340372
+    created: 1728445807
+    reqTimestampMock: 2024-10-09T03:50:07.353243979Z
+    resTimestampMock: 2024-10-09T03:50:07.353700939Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-2
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"products","filter":{"name":"Wireless Mosuse"},"limit":{"$numberLong":"1"},"singleBatch":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 166
+            requestId: 11
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"products","filter":{"name":"Wireless Mosuse"},"limit":{"$numberLong":"1"},"singleBatch":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }'
+            checksum: 0
+          read_delay: 2650425873
+    responses:
+        - header:
+            length: 105
+            requestId: 9
+            responseTo: 11
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[],"id":{"$numberLong":"0"},"ns":"Testing.products"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 1808686
+    created: 1728445810
+    reqTimestampMock: 2024-10-09T03:50:10.004297955Z
+    resTimestampMock: 2024-10-09T03:50:10.006243124Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-3
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"insert":"products","ordered":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }, { SectionSingle identifier: documents , msgs: [ {"_id":{"$oid":"6705fd7294ce12d440180183"},"name":"Wireless Mosuse","price":{"$numberDouble":"25.99"},"description":"A high-precision wireless mouse with ergonomic design.","category":"Electronics","stock":{"$numberInt":"150"}} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 297
+            requestId: 12
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"insert":"products","ordered":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }'
+                - '{ SectionSingle identifier: documents , msgs: [ {"_id":{"$oid":"6705fd7294ce12d440180183"},"name":"Wireless Mosuse","price":{"$numberDouble":"25.99"},"description":"A high-precision wireless mouse with ergonomic design.","category":"Electronics","stock":{"$numberInt":"150"}} ] }'
+            checksum: 0
+          read_delay: 208318
+    responses:
+        - header:
+            length: 45
+            requestId: 10
+            responseTo: 12
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 2716243
+    created: 1728445810
+    reqTimestampMock: 2024-10-09T03:50:10.006604749Z
+    resTimestampMock: 2024-10-09T03:50:10.00954022Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-4
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"$db":"admin"} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 62
+            requestId: 13
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"$db":"admin"} }'
+            checksum: 0
+          read_delay: 10000968178
+    responses:
+        - header:
+            length: 323
+            requestId: 11
+            responseTo: 13
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"helloOk":true,"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"6705fd6e9d54d7511f21aad5"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1728445817354"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"3"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"25"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 406831
+    created: 1728445817
+    reqTimestampMock: 2024-10-09T03:50:17.354446666Z
+    resTimestampMock: 2024-10-09T03:50:17.355014268Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-5
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 65536, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"6705fd6e9d54d7511f21aad5"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin"} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 148
+            requestId: 6
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 65536
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"6705fd6e9d54d7511f21aad5"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin"} }'
+            checksum: 0
+          read_delay: 434615
+    responses:
+        - header:
+            length: 323
+            requestId: 12
+            responseTo: 6
+            Opcode: 2013
+          message:
+            flagBits: 2
+            sections:
+                - '{ SectionSingle msg: {"helloOk":true,"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"6705fd6e9d54d7511f21aad5"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1728445817360"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"1"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"25"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 10009873568
+    created: 1728445817
+    reqTimestampMock: 2024-10-09T03:50:07.350408867Z
+    resTimestampMock: 2024-10-09T03:50:17.360402901Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-6
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"products","filter":{"_id":{"$oid":"6705fd7294ce12d440180183"}},"limit":{"$numberLong":"1"},"singleBatch":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 157
+            requestId: 18
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"products","filter":{"_id":{"$oid":"6705fd7294ce12d440180183"}},"limit":{"$numberLong":"1"},"singleBatch":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }'
+            checksum: 0
+          read_delay: 53809166146
+    responses:
+        - header:
+            length: 280
+            requestId: 37
+            responseTo: 18
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[{"_id":{"$oid":"6705fd7294ce12d440180183"},"name":"Wireless Mosuse","price":{"$numberDouble":"25.99"},"description":"A high-precision wireless mouse with ergonomic design.","category":"Electronics","stock":{"$numberInt":"150"}}],"id":{"$numberLong":"0"},"ns":"Testing.products"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 839486
+    created: 1728445863
+    reqTimestampMock: 2024-10-09T03:51:03.818899377Z
+    resTimestampMock: 2024-10-09T03:51:03.820086979Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-7
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"update":"products","ordered":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }, { SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$oid":"6705fd7294ce12d440180183"}},"u":{"$set":{"price":{"$numberDouble":"25.929"},"description":"A high-precision wireless mouse with ergonomic design.","category":"Electronics","stock":{"$numberInt":"150"},"name":"Wireless Mosuse"}}} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 322
+            requestId: 23
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"update":"products","ordered":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }'
+                - '{ SectionSingle identifier: updates , msgs: [ {"q":{"_id":{"$oid":"6705fd7294ce12d440180183"}},"u":{"$set":{"price":{"$numberDouble":"25.929"},"description":"A high-precision wireless mouse with ergonomic design.","category":"Electronics","stock":{"$numberInt":"150"},"name":"Wireless Mosuse"}}} ] }'
+            checksum: 0
+          read_delay: 42370423685
+    responses:
+        - header:
+            length: 60
+            requestId: 54
+            responseTo: 23
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"nModified":{"$numberInt":"1"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 753412
+    created: 1728445906
+    reqTimestampMock: 2024-10-09T03:51:46.190678511Z
+    resTimestampMock: 2024-10-09T03:51:46.191584698Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-8
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"products","filter":{},"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 111
+            requestId: 26
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"products","filter":{},"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }'
+            checksum: 0
+          read_delay: 16534178759
+    responses:
+        - header:
+            length: 280
+            requestId: 66
+            responseTo: 26
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[{"_id":{"$oid":"6705fd7294ce12d440180183"},"name":"Wireless Mosuse","price":{"$numberDouble":"25.929"},"description":"A high-precision wireless mouse with ergonomic design.","category":"Electronics","stock":{"$numberInt":"150"}}],"id":{"$numberLong":"0"},"ns":"Testing.products"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 755387
+    created: 1728445922
+    reqTimestampMock: 2024-10-09T03:52:02.72588511Z
+    resTimestampMock: 2024-10-09T03:52:02.726874342Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-9
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"delete":"products","ordered":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }, { SectionSingle identifier: deletes , msgs: [ {"q":{"_id":{"$oid":"6705fd7294ce12d440180183"}},"limit":{"$numberInt":"1"}} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 164
+            requestId: 29
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"delete":"products","ordered":true,"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }'
+                - '{ SectionSingle identifier: deletes , msgs: [ {"q":{"_id":{"$oid":"6705fd7294ce12d440180183"}},"limit":{"$numberInt":"1"}} ] }'
+            checksum: 0
+          read_delay: 20985331357
+    responses:
+        - header:
+            length: 45
+            requestId: 75
+            responseTo: 29
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 726420
+    created: 1728445943
+    reqTimestampMock: 2024-10-09T03:52:23.712362689Z
+    resTimestampMock: 2024-10-09T03:52:23.713261383Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-10
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"products","filter":{},"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 111
+            requestId: 31
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"products","filter":{},"lsid":{"id":{"$binary":{"base64":"VPaftFYXSa24BXWMhM45vw==","subType":"04"}}},"$db":"Testing"} }'
+            checksum: 0
+          read_delay: 8055376848
+    responses:
+        - header:
+            length: 105
+            requestId: 80
+            responseTo: 31
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[],"id":{"$numberLong":"0"},"ns":"Testing.products"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 728912
+    created: 1728445951
+    reqTimestampMock: 2024-10-09T03:52:31.768750468Z
+    resTimestampMock: 2024-10-09T03:52:31.769625202Z
