@@ -1,4 +1,4 @@
-FROM golang:1.22.2
+FROM golang:1.22.2-alpine AS builder
 
 WORKDIR /app
 
@@ -6,10 +6,23 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
+
 COPY . .
 
-RUN go build -o main .
+# Build the Go app as a statically linked binary
+RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+
+# Second stage: Create a minimal image
+FROM alpine:latest
+
+# Set working directory for the final image
+WORKDIR /root/
+
+# Copy only the binary from the builder stage
+COPY --from=builder /app/main .
+
 
 EXPOSE 8081
 
-CMD ["./main"] 
+
+CMD ["./main"]
