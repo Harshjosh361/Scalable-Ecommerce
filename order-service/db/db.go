@@ -4,13 +4,18 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func Init() *mongo.Database {
-	clientOption := options.Client().ApplyURI("mongodb://mongo:27019/")
+	mongoURI := os.Getenv("MONGO_URI")
+	if mongoURI == "" {
+		log.Fatal("failed to get env")
+	}
+	clientOption := options.Client().ApplyURI(mongoURI)
 	client, err := mongo.Connect(context.Background(), clientOption)
 	if err != nil {
 		log.Fatal("failed to connect to database")

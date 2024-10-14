@@ -1,14 +1,14 @@
 services:
   mongo:
-    container_name: mongo
+    container_name: mongo-order
     image: mongo:latest
     restart: always
     ports:
-      - "27020:27017"
+      - "27017:27017"
       
   goapp:
     build: .
-    container_name: goapp
+    container_name: goapp-order
     ports:
       - "8083:8083"
     depends_on:

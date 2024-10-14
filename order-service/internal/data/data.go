@@ -3,6 +3,7 @@ package data
 import (
 	"context"
 	"harshy/internal/models"
+	"log"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -22,8 +23,15 @@ func NewOrderData(db *mongo.Database) *OrderData {
 
 func (o *OrderData) CreateOrder(ctx context.Context, order *models.Order) error {
 	order.CreatedAt = time.Now()
-	_, err := o.Collection.InsertOne(ctx, order)
-	return err
+	result, err := o.Collection.InsertOne(ctx, order)
+	if err != nil {
+		log.Printf("Failed to insert order: %v", err) // Log the error for debugging
+		return err                                    // Return the error for further handling
+	}
+	// Retrieve the generated ID from the result and update the order object
+	order.Id = result.InsertedID.(primitive.ObjectID)
+
+	return nil // Return nil if the operation was successful
 }
 
 func (o *OrderData) GetOrderByUserId(ctx context.Context, userId primitive.ObjectID) ([]*models.Order, error) {
@@ -49,7 +57,7 @@ func (o *OrderData) GetOrderByUserId(ctx context.Context, userId primitive.Objec
 
 func (o *OrderData) GetOrderById(ctx context.Context, id primitive.ObjectID) (*models.Order, error) {
 	var order models.Order
-	err := o.Collection.FindOne(ctx, bson.M{"id": id}).Decode(&order)
+	err := o.Collection.FindOne(ctx, bson.M{"_id": id}).Decode(&order)
 	if err != nil {
 		return nil, err
 	}

@@ -1,0 +1,210 @@
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-0
+spec:
+    metadata:
+        operation: '{ OpQuery flags: [SecondaryOK], fullCollectionName: admin.$cmd, numberToSkip: 0, numberToReturn: -1, query: {"isMaster": {"$numberInt":"1"},"helloOk": true,"compression": [],"client": {"driver": {"name": "mongo-go-driver","version": "1.17.0"},"os": {"type": "linux","architecture": "amd64"},"platform": "go1.22.2","env": {"container": {"runtime": "docker"}}}}, returnFieldsSelector:  }'
+        type: config
+    requests:
+        - header:
+            length: 276
+            requestId: 4
+            responseTo: 0
+            Opcode: 2004
+          message:
+            flags: 4
+            collection_name: admin.$cmd
+            number_to_skip: 0
+            number_to_return: -1
+            query: '{"isMaster":{"$numberInt":"1"},"helloOk":true,"compression":[],"client":{"driver":{"name":"mongo-go-driver","version":"1.17.0"},"os":{"type":"linux","architecture":"amd64"},"platform":"go1.22.2","env":{"container":{"runtime":"docker"}}}}'
+            return_fields_selector: ""
+    responses:
+        - header:
+            length: 329
+            requestId: 3
+            responseTo: 4
+            Opcode: 1
+          message:
+            response_flags: 8
+            cursor_id: 0
+            starting_from: 0
+            number_returned: 1
+            documents:
+                - '{"helloOk":true,"ismaster":true,"topologyVersion":{"processId":{"$oid":"670d4e98bdbb84651f26570c"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1728925376990"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"1"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"25"},"readOnly":false,"ok":{"$numberDouble":"1.0"}}'
+          read_delay: 572654
+    created: 1728925376
+    reqTimestampMock: 2024-10-14T17:02:56.990604187Z
+    resTimestampMock: 2024-10-14T17:02:56.99141024Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-1
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"$db":"admin"} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 62
+            requestId: 8
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"$db":"admin"} }'
+            checksum: 0
+          read_delay: 10000998367
+    responses:
+        - header:
+            length: 323
+            requestId: 4
+            responseTo: 8
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"helloOk":true,"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"670d4eb607ab93fb504a3b50"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1728925386995"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"1"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"25"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 569431
+    created: 1728925386
+    reqTimestampMock: 2024-10-14T17:03:06.994912731Z
+    resTimestampMock: 2024-10-14T17:03:06.995729522Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-2
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 65536, sections: [{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"670d4e98bdbb84651f26570c"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin"} }], checksum: 0 }'
+        type: config
+    requests:
+        - header:
+            length: 148
+            requestId: 5
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 65536
+            sections:
+                - '{ SectionSingle msg: {"hello":{"$numberInt":"1"},"helloOk":true,"topologyVersion":{"processId":{"$oid":"670d4e98bdbb84651f26570c"},"counter":{"$numberLong":"0"}},"maxAwaitTimeMS":{"$numberLong":"10000"},"$db":"admin"} }'
+            checksum: 0
+          read_delay: 262059
+    responses:
+        - header:
+            length: 323
+            requestId: 4
+            responseTo: 5
+            Opcode: 2013
+          message:
+            flagBits: 2
+            sections:
+                - '{ SectionSingle msg: {"helloOk":true,"isWritablePrimary":true,"topologyVersion":{"processId":{"$oid":"670d4e98bdbb84651f26570c"},"counter":{"$numberLong":"0"}},"maxBsonObjectSize":{"$numberInt":"16777216"},"maxMessageSizeBytes":{"$numberInt":"48000000"},"maxWriteBatchSize":{"$numberInt":"100000"},"localTime":{"$date":{"$numberLong":"1728925387000"}},"logicalSessionTimeoutMinutes":{"$numberInt":"30"},"connectionId":{"$numberInt":"1"},"minWireVersion":{"$numberInt":"0"},"maxWireVersion":{"$numberInt":"25"},"readOnly":false,"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 10008715773
+    created: 1728925387
+    reqTimestampMock: 2024-10-14T17:02:56.991787579Z
+    resTimestampMock: 2024-10-14T17:03:07.000697955Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-3
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"insert":"orders","ordered":true,"lsid":{"id":{"$binary":{"base64":"/GB49cb7RFupIvvofoPT9g==","subType":"04"}}},"$db":"Testing"} }, { SectionSingle identifier: documents , msgs: [ {"_id":{"$oid":"670d4fabc4d64c18ca811383"},"userid":{"$oid":"650f1b9b9b5b9f0d5c1a3a8b"},"items":[{"product_id":{"$oid":"650f1b9b9b5b9f0d5c1a3a8c"},"product_name":"Laptop","quantity":{"$numberInt":"1"},"price":{"$numberDouble":"1200.5"}},{"product_id":{"$oid":"650f1b9b9b5b9f0d5c1a3a8d"},"product_name":"Mouse","quantity":{"$numberInt":"2"},"price":{"$numberDouble":"25.0"}}],"totalamount":{"$numberDouble":"1250.5"},"createdat":{"$date":{"$numberLong":"1728925611068"}},"shippinginfo":{"address":"123 Main St","city":"New York","state":"NY","postal_code":"10001","country":"USA"}} ] }], checksum: 0 }'
+    requests:
+        - header:
+            length: 505
+            requestId: 31
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"insert":"orders","ordered":true,"lsid":{"id":{"$binary":{"base64":"/GB49cb7RFupIvvofoPT9g==","subType":"04"}}},"$db":"Testing"} }'
+                - '{ SectionSingle identifier: documents , msgs: [ {"_id":{"$oid":"670d4fabc4d64c18ca811383"},"userid":{"$oid":"650f1b9b9b5b9f0d5c1a3a8b"},"items":[{"product_id":{"$oid":"650f1b9b9b5b9f0d5c1a3a8c"},"product_name":"Laptop","quantity":{"$numberInt":"1"},"price":{"$numberDouble":"1200.5"}},{"product_id":{"$oid":"650f1b9b9b5b9f0d5c1a3a8d"},"product_name":"Mouse","quantity":{"$numberInt":"2"},"price":{"$numberDouble":"25.0"}}],"totalamount":{"$numberDouble":"1250.5"},"createdat":{"$date":{"$numberLong":"1728925611068"}},"shippinginfo":{"address":"123 Main St","city":"New York","state":"NY","postal_code":"10001","country":"USA"}} ] }'
+            checksum: 0
+          read_delay: 389644
+    responses:
+        - header:
+            length: 45
+            requestId: 28
+            responseTo: 31
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"n":{"$numberInt":"1"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 20220321
+    created: 1728925611
+    reqTimestampMock: 2024-10-14T17:06:51.075076756Z
+    resTimestampMock: 2024-10-14T17:06:51.095654303Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-4
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"orders","filter":{"_id":{"$oid":"670d4fabc4d64c18ca811383"}},"limit":{"$numberLong":"1"},"singleBatch":true,"lsid":{"id":{"$binary":{"base64":"/GB49cb7RFupIvvofoPT9g==","subType":"04"}}},"$db":"Testing"} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 155
+            requestId: 39
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"orders","filter":{"_id":{"$oid":"670d4fabc4d64c18ca811383"}},"limit":{"$numberLong":"1"},"singleBatch":true,"lsid":{"id":{"$binary":{"base64":"/GB49cb7RFupIvvofoPT9g==","subType":"04"}}},"$db":"Testing"} }'
+            checksum: 0
+          read_delay: 51218935045
+    responses:
+        - header:
+            length: 488
+            requestId: 34
+            responseTo: 39
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[{"_id":{"$oid":"670d4fabc4d64c18ca811383"},"userid":{"$oid":"650f1b9b9b5b9f0d5c1a3a8b"},"items":[{"product_id":{"$oid":"650f1b9b9b5b9f0d5c1a3a8c"},"product_name":"Laptop","quantity":{"$numberInt":"1"},"price":{"$numberDouble":"1200.5"}},{"product_id":{"$oid":"650f1b9b9b5b9f0d5c1a3a8d"},"product_name":"Mouse","quantity":{"$numberInt":"2"},"price":{"$numberDouble":"25.0"}}],"totalamount":{"$numberDouble":"1250.5"},"createdat":{"$date":{"$numberLong":"1728925611068"}},"shippinginfo":{"address":"123 Main St","city":"New York","state":"NY","postal_code":"10001","country":"USA"}}],"id":{"$numberLong":"0"},"ns":"Testing.orders"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 896266
+    created: 1728925662
+    reqTimestampMock: 2024-10-14T17:07:42.314766471Z
+    resTimestampMock: 2024-10-14T17:07:42.31598324Z
+---
+version: api.keploy.io/v1beta1
+kind: Mongo
+name: mock-5
+spec:
+    metadata:
+        operation: '{ OpMsg flags: 0, sections: [{ SectionSingle msg: {"find":"orders","filter":{"userid":{"$oid":"650f1b9b9b5b9f0d5c1a3a8b"}},"lsid":{"id":{"$binary":{"base64":"/GB49cb7RFupIvvofoPT9g==","subType":"04"}}},"$db":"Testing"} }], checksum: 0 }'
+    requests:
+        - header:
+            length: 129
+            requestId: 43
+            responseTo: 0
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"find":"orders","filter":{"userid":{"$oid":"650f1b9b9b5b9f0d5c1a3a8b"}},"lsid":{"id":{"$binary":{"base64":"/GB49cb7RFupIvvofoPT9g==","subType":"04"}}},"$db":"Testing"} }'
+            checksum: 0
+          read_delay: 26239927616
+    responses:
+        - header:
+            length: 488
+            requestId: 42
+            responseTo: 43
+            Opcode: 2013
+          message:
+            flagBits: 0
+            sections:
+                - '{ SectionSingle msg: {"cursor":{"firstBatch":[{"_id":{"$oid":"670d4fabc4d64c18ca811383"},"userid":{"$oid":"650f1b9b9b5b9f0d5c1a3a8b"},"items":[{"product_id":{"$oid":"650f1b9b9b5b9f0d5c1a3a8c"},"product_name":"Laptop","quantity":{"$numberInt":"1"},"price":{"$numberDouble":"1200.5"}},{"product_id":{"$oid":"650f1b9b9b5b9f0d5c1a3a8d"},"product_name":"Mouse","quantity":{"$numberInt":"2"},"price":{"$numberDouble":"25.0"}}],"totalamount":{"$numberDouble":"1250.5"},"createdat":{"$date":{"$numberLong":"1728925611068"}},"shippinginfo":{"address":"123 Main St","city":"New York","state":"NY","postal_code":"10001","country":"USA"}}],"id":{"$numberLong":"0"},"ns":"Testing.orders"},"ok":{"$numberDouble":"1.0"}} }'
+            checksum: 0
+          read_delay: 2217173
+    created: 1728925688
+    reqTimestampMock: 2024-10-14T17:08:08.556155817Z
+    resTimestampMock: 2024-10-14T17:08:08.558675321Z

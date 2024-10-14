@@ -1,0 +1,72 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-2
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8083/order
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br
+            Connection: close
+            Content-Length: "600"
+            Content-Type: application/json
+            Host: localhost:8083
+            User-Agent: Thunder Client (https://www.thunderclient.com)
+        body: |
+            {
+                "userid": "650f1b9b9b5b9f0d5c1a3a8b",
+                "items": [
+                    {
+                        "product_id": "650f1b9b9b5b9f0d5c1a3a8c",
+                        "product_name": "Laptop",
+                        "quantity": 1,
+                        "price": 1200.50
+                    },
+                    {
+                        "product_id": "650f1b9b9b5b9f0d5c1a3a8d",
+                        "product_name": "Mouse",
+                        "quantity": 2,
+                        "price": 25.00
+                    }
+                ],
+                "totalamount": 1250.50,
+                "shippingInfo": {
+                    "address": "123 Main St",
+                    "city": "New York",
+                    "state": "NY",
+                    "postal_code": "10001",
+                    "country": "USA"
+                }
+            }
+        timestamp: 2024-10-14T17:06:51.067936916Z
+    resp:
+        status_code: 200
+        header:
+            Content-Length: "438"
+            Content-Type: application/json; charset=utf-8
+            Date: Mon, 14 Oct 2024 17:06:51 GMT
+        body: '{"id":"670d4fabc4d64c18ca811383","userid":"650f1b9b9b5b9f0d5c1a3a8b","items":[{"product_id":"650f1b9b9b5b9f0d5c1a3a8c","product_name":"Laptop","quantity":1,"price":1200.5},{"product_id":"650f1b9b9b5b9f0d5c1a3a8d","product_name":"Mouse","quantity":2,"price":25}],"totalamount":1250.5,"createdAt":"2024-10-14T17:06:51.068523763Z","shippingInfo":{"address":"123 Main St","city":"New York","state":"NY","postal_code":"10001","country":"USA"}}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-10-14T17:06:53.192385884Z
+    objects: []
+    assertions:
+        noise:
+            body.createdAt: []
+            header.Date: []
+    created: 1728925613
+curl: |-
+    curl --request POST \
+      --url http://localhost:8083/order \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Accept: */*' \
+      --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+      --header 'Content-Type: application/json' \
+      --header 'Host: localhost:8083' \
+      --header 'Connection: close' \
+      --data "{\n    \"userid\": \"650f1b9b9b5b9f0d5c1a3a8b\",\n    \"items\": [\n        {\n            \"product_id\": \"650f1b9b9b5b9f0d5c1a3a8c\",\n            \"product_name\": \"Laptop\",\n            \"quantity\": 1,\n            \"price\": 1200.50\n        },\n        {\n            \"product_id\": \"650f1b9b9b5b9f0d5c1a3a8d\",\n            \"product_name\": \"Mouse\",\n            \"quantity\": 2,\n            \"price\": 25.00\n        }\n    ],\n    \"totalamount\": 1250.50,\n    \"shippingInfo\": {\n        \"address\": \"123 Main St\",\n        \"city\": \"New York\",\n        \"state\": \"NY\",\n        \"postal_code\": \"10001\",\n        \"country\": \"USA\"\n    }\n}\n"
