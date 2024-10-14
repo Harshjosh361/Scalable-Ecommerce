@@ -1,14 +1,16 @@
 services:
   mongo:
-    container_name: mongo
+    container_name: mongo-payment
     image: mongo:latest
     restart: always
     ports:
-      - "27019:27017"
+      - "27017:27017"
       
   goapp:
     build: .
-    container_name: goapp
+    container_name: goapp-payment
+    env_file:
+      - .env
     ports:
       - "8082:8082"
     depends_on:

@@ -27,7 +27,7 @@ func (p *PaymentData) SavePayment(ctx context.Context, payment *model.Payment) e
 func (p *PaymentData) GetPaymentById(ctx context.Context, id primitive.ObjectID) (*model.Payment, error) {
 
 	var payment *model.Payment
-	err := p.Collection.FindOne(ctx, bson.M{"id": id}).Decode(&payment)
+	err := p.Collection.FindOne(ctx, bson.M{"_id": id}).Decode(&payment)
 	if err != nil {
 		return nil, err
 	}

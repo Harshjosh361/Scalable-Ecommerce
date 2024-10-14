@@ -1,15 +1,13 @@
 # First stage: Build the Go binary
 FROM golang:1.22.2-alpine AS builder
 
-# Set the working directory inside the builder stage
+
 WORKDIR /app
 
-# Copy go.mod and go.sum to cache dependencies
 COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-# Copy the rest of the application files
 COPY . .
 
 # Build the Go app as a statically linked binary
@@ -24,8 +22,6 @@ WORKDIR /root/
 # Copy the Go binary from the builder stage
 COPY --from=builder /app/main .
 
-# Expose port 8082
 EXPOSE 8082
 
-# Run the Go binary
 CMD ["./main"]

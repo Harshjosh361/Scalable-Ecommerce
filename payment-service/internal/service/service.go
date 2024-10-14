@@ -8,19 +8,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/paymentintent"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
-
-// load env variables
-func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-}
 
 type PaymentService struct {
 	paymentData *data.PaymentData
@@ -37,8 +28,12 @@ func (ps *PaymentService) ProcessPayment(ctx context.Context, payment *model.Pay
 	payment.CreatedAt = time.Now()
 	payment.UpdatedAt = time.Now()
 
+	STRIPE_API := os.Getenv("STRIPE_API")
+	if STRIPE_API == "" {
+		log.Fatal("failed to get stripe api env")
+	}
 	// 	stripe api client
-	stripe.Key = os.Getenv("STRIPE_API")
+	stripe.Key = STRIPE_API
 
 	// Creating a stripe payment intent
 	params := &stripe.PaymentIntentParams{
