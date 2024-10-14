@@ -5,27 +5,33 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/twilio/twilio-go"
 	twilioApi "github.com/twilio/twilio-go/rest/api/v2010"
 )
 
 // load env variables
-func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-}
+// func init() {
+// 	err := godotenv.Load()
+// 	if err != nil {
+// 		log.Fatal("Error loading .env file")
+// 	}
+// }
 
 type NotificationService struct {
 	twilioClient *twilio.RestClient
 }
 
 func NewNotificationService() *NotificationService {
+	accountSid := os.Getenv("Account_SID")
+	authToken := os.Getenv("Auth_Token")
+
+	if accountSid == "" || authToken == "" {
+		log.Fatal("Twilio credentials are missing")
+	}
+
 	client := twilio.NewRestClientWithParams(twilio.ClientParams{
-		Username: os.Getenv("Account_SID"),
-		Password: os.Getenv("Auth_Token"),
+		Username: accountSid,
+		Password: authToken,
 	})
 
 	return &NotificationService{
@@ -34,8 +40,9 @@ func NewNotificationService() *NotificationService {
 }
 
 func (ns *NotificationService) SendSMS(to string, body string) error {
+	phoneNumber := os.Getenv("PhoneNumber")
 	params := &twilioApi.CreateMessageParams{}
-	params.SetFrom(os.Getenv("PhoneNumber"))
+	params.SetFrom(phoneNumber)
 	params.SetBody(body)
 	params.SetTo(to)
 
