@@ -4,6 +4,7 @@ import (
 	"harsh/db"
 	"harsh/internal/controller"
 	"harsh/internal/data"
+	"harsh/internal/routes"
 	"harsh/internal/service"
 	"log"
 	"net/http"
@@ -20,18 +21,15 @@ func main() {
 	productService := service.NewProductService(productStore)
 	productController := controller.NewProductController(productService)
 
-	// routes
+	// Health Check
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Product Server is live",
 		})
 	})
 
-	router.GET("/products", productController.GetAllProduct)
-	router.GET("/product/:id", productController.GetProduct)
-	router.POST("/product", productController.CreateProduct)
-	router.DELETE("/product/:id", productController.DeleteProduct)
-	router.PUT("/update-product/:id", productController.ModifyProduct)
+	// Define product routes using the new routes file
+	routes.ProductRoutes(router, productController)
 
 	// starting server
 	if err := router.Run(":8081"); err != nil {
