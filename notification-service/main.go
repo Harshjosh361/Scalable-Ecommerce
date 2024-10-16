@@ -20,7 +20,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "notification Server is live"})
 	})
 
-	router.POST("/message", notificationController.SendSMS)
+	router.POST("/notification", notificationController.SendSMS)
 
 	if err := router.Run(":8084"); err != nil {
 		log.Fatalf("Error starting server: %v", err)
