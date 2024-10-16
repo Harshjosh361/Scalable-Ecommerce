@@ -10,7 +10,7 @@ func OrderRoutes(router *gin.Engine, OrderController *controller.OrderController
 
 	orderGroup := router.Group("/orders")
 
-	orderGroup.POST("/order", OrderController.CreateOrder)
-	orderGroup.GET("/order/:id", OrderController.GetOrderById)
-	orderGroup.GET("/order/user/:userid", OrderController.GetOrderByUserId)
+	orderGroup.POST("/", OrderController.CreateOrder)
+	orderGroup.GET("/:id", OrderController.GetOrderById)
+	orderGroup.GET("/user/:userid", OrderController.GetOrderByUserId)
 }
