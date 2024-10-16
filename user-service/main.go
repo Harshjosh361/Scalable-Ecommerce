@@ -4,6 +4,7 @@ import (
 	"harsh/db"
 	"harsh/internal/controller"
 	"harsh/internal/data"
+	"harsh/internal/routes"
 	"harsh/internal/service"
 	"log"
 	"net/http"
@@ -29,9 +30,7 @@ func main() {
 			"message": "user Server is live",
 		})
 	})
-	router.GET("/users/:id", userController.GetUser)
-	router.POST("/register", userController.CreateUser)
-	router.POST("/login", userController.Login)
+	routes.UserRoutes(router, userController)
 
 	// starting server
 	if err := router.Run(":8080"); err != nil {

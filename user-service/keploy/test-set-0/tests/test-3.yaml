@@ -1,0 +1,51 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-3
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:8080/register
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br
+            Connection: close
+            Content-Length: "92"
+            Content-Type: application/json
+            Host: localhost:8080
+            User-Agent: Thunder Client (https://www.thunderclient.com)
+        body: |
+            {
+                "name": "harsh",
+                "email": "joke1r@.com",
+                "password": "nansdsddssditalssa1@"
+            }
+        timestamp: 2024-10-08T18:43:14.302714887Z
+    resp:
+        status_code: 500
+        header:
+            Content-Length: "35"
+            Content-Type: application/json; charset=utf-8
+            Date: Tue, 08 Oct 2024 18:43:14 GMT
+        body: '{"error":"user already registered"}'
+        status_message: Internal Server Error
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-10-08T18:43:16.30738299Z
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+    created: 1728412996
+curl: |-
+    curl --request POST \
+      --url http://localhost:8080/register \
+      --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+      --header 'Content-Type: application/json' \
+      --header 'Host: localhost:8080' \
+      --header 'Connection: close' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Accept: */*' \
+      --data "{\n    \"name\": \"harsh\",\n    \"email\": \"joke1r@.com\",\n    \"password\": \"nansdsddssditalssa1@\"\n}\n"

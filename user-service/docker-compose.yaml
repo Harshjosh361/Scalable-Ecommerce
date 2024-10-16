@@ -1,14 +1,14 @@
 services:
   mongo:
-    container_name: mongo
+    container_name: mongo-user
     image: mongo:latest
     restart: always
     ports:
-      - "27017:27017"
+      - "27018:27017"
       
   goapp:
     build: .
-    container_name: goapp
+    container_name: goapp-user
     ports:
       - "8080:8080"
     depends_on:
