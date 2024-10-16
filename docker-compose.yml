@@ -1,0 +1,137 @@
+services:
+  # User Service
+  mongo-user:
+    image: mongo:latest
+    container_name: mongo-user
+    ports:
+      - "27018:27017"
+    networks:
+      - app-network
+
+  goapp-user:
+    build: ./user-service  # Path to the user service Dockerfile
+    container_name: goapp-user
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo-user
+    environment:
+      - MONGO_URI=mongodb://mongo-user:27017/
+    networks:
+      - app-network
+
+  # Product Service
+  mongo-product:
+    image: mongo:latest
+    container_name: mongo-product
+    ports:
+      - "27019:27017"
+    networks:
+      - app-network
+
+  goapp-product:
+    build: ./product-service  # Path to the product service Dockerfile
+    container_name: goapp-product
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo-product
+    environment:
+      - MONGO_URI=mongodb://mongo-product:27017/
+    networks:
+      - app-network
+  
+ #payment-service
+  mongo-payment:
+    image: mongo:latest
+    container_name: mongo-payment
+    ports:
+      - "27021:27017"
+    networks:
+      - app-network
+
+  goapp-payment:
+    build: ./payment-service  # Path to the payment service Dockerfile
+    container_name: goapp-payment
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mongo-payment
+    environment:
+      - MONGO_URI=mongodb://mongo-payment:27017/
+    networks:
+      - app-network
+   #order-service
+  mongo-order:
+    image: mongo:latest
+    container_name: mongo-order
+    ports:
+      - "27022:27017"
+    networks:
+      - app-network
+
+  goapp-order:
+    build: ./order-service  # Path to the order service Dockerfile
+    container_name: goapp-order
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mongo-order
+    environment:
+      - MONGO_URI=mongodb://mongo-order:27017/
+    networks:
+      - app-network
+
+  #notification service
+  goapp-notification:
+    build: ./notification-service  # Path to the notification service Dockerfile
+    container_name: goapp-notification
+    ports:
+      - "8084:8084"
+    env_file:
+      - ./notification-service/.env  #Relative patch to twilio credentials
+    networks:
+      - app-network
+
+  #cart service
+  mongo-cart:
+    image: mongo:latest
+    container_name: mongo-cart
+    ports:
+      - "27023:27017"
+    networks:
+      - app-network
+
+  goapp-cart:
+    build: ./cart-service  # Path to the cart service Dockerfile
+    container_name: goapp-cart
+    ports:
+      - "8085:8085"
+    depends_on:
+      - mongo-cart
+    environment:
+      - MONGO_URI=mongodb://mongo-cart:27017/
+    networks:
+      - app-network
+
+  # NGINX Gateway
+  nginx-gateway:
+    image: nginx:latest
+    container_name: nginx-gateway
+    ports:
+      - "82:80"
+    volumes:
+      - /home/harsh/EcommerceApi/nginx/api_gateway.conf:/etc/nginx/nginx.conf  # Correct path
+    depends_on:
+      - goapp-user
+      - goapp-product
+      - goapp-payment
+      - goapp-order
+      - goapp-notification
+      - goapp-cart
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
