@@ -4,6 +4,7 @@ import (
 	"harsh/db"
 	"harsh/internal/controller"
 	"harsh/internal/data"
+	"harsh/internal/routes"
 	"harsh/internal/service"
 	"log"
 	"net/http"
@@ -24,8 +25,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"Message": "Payment server is live"})
 	})
 
-	router.POST("/payment", PaymentController.ProcessPayment)
-	router.GET("/payment/:id", PaymentController.GetPayment)
+	routes.PaymentRoutes(router, PaymentController)
 
 	if err := router.Run(":8082"); err != nil {
 		log.Fatalf("Error starting server: %v", err)
