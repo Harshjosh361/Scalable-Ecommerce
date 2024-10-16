@@ -4,6 +4,7 @@ import (
 	"harsh/db"
 	"harsh/internal/controller"
 	"harsh/internal/data"
+	"harsh/internal/routes"
 	"harsh/internal/service"
 	"log"
 	"net/http"
@@ -29,11 +30,7 @@ func main() {
 	})
 
 	// routes
-	router.POST("/cart", CartController.CreateCart)
-	router.PUT("/cart/:userId/items", CartController.AddToCart)
-	router.DELETE("/cart/:userId/items/:productId", CartController.RemoveFromCart)
-	router.GET("/cart/:userId", CartController.GetCart)
-	router.DELETE("/cart/:userId/clear", CartController.ClearCart)
+	routes.CartRoutes(router, CartController)
 
 	if err := router.Run(":8085"); err != nil {
 		log.Fatalf("Error starting server: %v", err)
