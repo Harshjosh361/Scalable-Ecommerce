@@ -3,7 +3,6 @@
 
 ## Table of Contents
 - [Project Overview](#project-overview)
-- [Architecture](#architecture)
 - [Technologies Used](#technologies-used)
 - [Project Setup](#project-setup)
 - [Usage](#usage)
@@ -86,4 +85,4 @@ Contributions are welcome! Please follow these steps:
 5. Open a pull request.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the terms of the [MIT License](LICENSE).
