@@ -6,8 +6,8 @@
 - [Technologies Used](#technologies-used)
 - [Project Setup](#project-setup)
 - [Usage](#usage)
-- [API Endpoints](#api-endpoints)
 - [Testing](#testing)
+- [CI-CD Pipeline](#ci-cd-pipeline)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -75,6 +75,14 @@ This project uses Keploy for API testing. To run tests:
    keploy test -c "docker compose up" --container-name "my-app-container"
    ```
    Replace my-app-container with the original container name
+   
+## CI-CD Pipeline
+This project includes a Continuous Integration (CI) and Continuous Deployment (CD) pipeline:
+
+- **Continuous Integration**: Automated testing and building are set up to ensure that all code changes are validated before being merged.
+  
+- **Continuous Deployment**: The project is configured to push the latest Docker images to Docker Hub automatically upon successful builds. 
+
 
 ## Contributing
 Contributions are welcome! Please follow these steps:
