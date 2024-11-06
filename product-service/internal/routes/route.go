@@ -8,7 +8,7 @@ import (
 
 func ProductRoutes(router *gin.Engine, productController *controller.ProductController) {
 	// Base route for products
-	productGroup := router.Group("/products")
+	productGroup := router.Group("/api/v1/products")
 
 	// Define individual
 	productGroup.GET("/", productController.GetAllProduct)           // Get all products

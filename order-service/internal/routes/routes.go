@@ -8,7 +8,7 @@ import (
 
 func OrderRoutes(router *gin.Engine, OrderController *controller.OrderController) {
 
-	orderGroup := router.Group("/orders")
+	orderGroup := router.Group("/api/v1/orders")
 
 	orderGroup.POST("/", OrderController.CreateOrder)
 	orderGroup.GET("/:id", OrderController.GetOrderById)

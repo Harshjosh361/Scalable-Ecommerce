@@ -8,7 +8,7 @@ import (
 
 func PaymentRoutes(router *gin.Engine, PaymentController *controller.PaymentController) {
 
-	paymentGroup := router.Group("/payment")
+	paymentGroup := router.Group("/api/v1/payment")
 
 	paymentGroup.POST("/", PaymentController.ProcessPayment)
 	paymentGroup.GET("/:id", PaymentController.GetPayment)

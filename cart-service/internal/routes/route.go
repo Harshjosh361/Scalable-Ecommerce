@@ -9,7 +9,7 @@ import (
 func CartRoutes(router *gin.Engine, CartController *controller.CartController) {
 
 	//group the routes
-	cartGroup := router.Group("/cart")
+	cartGroup := router.Group("/api/v1/cart")
 
 	cartGroup.POST("/", CartController.CreateCart)
 	cartGroup.PUT("/:userId/items", CartController.AddToCart)
