@@ -2,7 +2,7 @@ module harsh
 
 go 1.24.0
 
-require go.mongodb.org/mongo-driver v1.17.0
+require go.mongodb.org/mongo-driver v1.17.7
 
 require (
 	github.com/bytedance/sonic v1.11.6 // indirect
@@ -37,7 +37,7 @@ require (
 require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/golang/snappy v0.0.4 // indirect
-	github.com/klauspost/compress v1.13.6 // indirect
+	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/stripe/stripe-go v70.15.0+incompatible
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
